@@ -51,21 +51,27 @@ class Main(tk.CTkTabview):
         switch_tab = self.add("Switch")
         bridge_tab = self.add("Bridge")
 
-        self.set("Switch")
-        # self.columnconfigure((0, 1), weight=1)
+        self.switch_tab_components = SwitchTab(switch_tab)
+        self.bridge_tab_components = BridgeTab(bridge_tab)
 
-        switch_tab.grid(column=0)
-        bridge_tab.grid(column=1)
+        # switch_tab.pack()
+        # bridge_tab.pack()
 
 
 class SwitchTab(tk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
+        switch_button = tk.CTkButton(parent, text="Button Switch")
+        switch_button.pack()
+
 
 class BridgeTab(tk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
+
+        bridge_button = tk.CTkButton(parent, text="Button Bridge")
+        bridge_button.pack()
 
 
 class LogWindow(tk.CTkFrame):
