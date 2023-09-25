@@ -23,9 +23,20 @@ class Window(tk.CTk):
         tk.set_appearance_mode("dark")
         tk.set_default_color_theme("dark-blue")
 
+        # grid
+
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=9)
+
+        self.rowconfigure(0, weight=1)
+
         # widgets
         self.settings = Settings(self)
         self.main = Main(self)
+
+        # put widgets of grid
+        self.settings.grid(column=0, row=0)
+        self.main.grid(column=1, row=0)
 
         # run
         self.mainloop()
@@ -34,7 +45,8 @@ class Window(tk.CTk):
 class Settings(tk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
-        # tk.CTkLabel(self, bg_color="red").pack(expand=True, fill="both")
+
+        # add setting menu
         self.place(x=0, y=0, relwidth=0.1, relheight=1)
         self.create_widgets()
 
@@ -50,24 +62,35 @@ class Settings(tk.CTkFrame):
             self, text="Button 3", command=lambda: generic_button(3)
         )
 
-        # self.rowconfigure((0, 1, 2, 3, 4), weight=1, uniform="a")
-
         # render buttons
         settings_button_1.pack(padx=5, pady=10)
         settings_button_2.pack(padx=5, pady=10)
         settings_button_3.pack(padx=5, pady=10)
 
 
-class Main(tk.CTkTabview):
+class Main(tk.CTkFrame):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        self.place(relx=0.1, y=0, relwidth=0.9, relheight=1)
+        tk.CTkLabel(self, bg_color="blue")
+
+        self.tabs = Tabs(self)
+        self.tabs.pack(fill="both")
+
+
+class Tabs(tk.CTkTabview):
     def __init__(self, parent):
         super().__init__(parent)
 
         self._segmented_button.configure()
 
-        # tk.CTkLabel(self, bg_color="red").pack(expand=True, fill="both")
-        self.place(relx=0.1, y=0, relwidth=0.9, relheight=1)
-
         # add big switch on top
+        font = tk.CTkFont(size=40)
+        self._segmented_button.configure(font=font)
+
+        self.columnconfigure((0, 1), weight=1)
+
         switch_tab = self.add("Switch")
         bridge_tab = self.add("Bridge")
 
@@ -82,8 +105,6 @@ class SwitchTab(tk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
-        # tk.CTkLabel(self, bg_color="red").pack(expand=True, fill="both")
-
         switch_button = tk.CTkButton(parent, text="Button Switch", command=switch_press)
         switch_button.pack()
 
@@ -91,8 +112,6 @@ class SwitchTab(tk.CTkFrame):
 class BridgeTab(tk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
-
-        # tk.CTkLabel(self, bg_color="blue").pack(expand=True, fill="both")
 
         bridge_button = tk.CTkButton(
             parent, text="Button Bridge", command=brridge_press
