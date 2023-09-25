@@ -1,6 +1,18 @@
 import customtkinter as tk
 
 
+def switch_press():
+    print("switch pressed")
+
+
+def brridge_press():
+    print("brdge pressed")
+
+
+def generic_button(i):
+    print(f"{i} button pressed")
+
+
 class Window(tk.CTk):
     def __init__(self, title, size):
         super().__init__()
@@ -28,9 +40,15 @@ class Settings(tk.CTkFrame):
 
     def create_widgets(self):
         # add buttons
-        settings_button_1 = tk.CTkButton(self, text="Button 1")
-        settings_button_2 = tk.CTkButton(self, text="Button 2")
-        settings_button_3 = tk.CTkButton(self, text="Button 3")
+        settings_button_1 = tk.CTkButton(
+            self, text="Button 1", command=lambda: generic_button(1)
+        )
+        settings_button_2 = tk.CTkButton(
+            self, text="Button 2", command=lambda: generic_button(2)
+        )
+        settings_button_3 = tk.CTkButton(
+            self, text="Button 3", command=lambda: generic_button(3)
+        )
 
         # self.rowconfigure((0, 1, 2, 3, 4), weight=1, uniform="a")
 
@@ -43,6 +61,8 @@ class Settings(tk.CTkFrame):
 class Main(tk.CTkTabview):
     def __init__(self, parent):
         super().__init__(parent)
+
+        self._segmented_button.configure()
 
         # tk.CTkLabel(self, bg_color="red").pack(expand=True, fill="both")
         self.place(relx=0.1, y=0, relwidth=0.9, relheight=1)
@@ -62,7 +82,9 @@ class SwitchTab(tk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
-        switch_button = tk.CTkButton(parent, text="Button Switch")
+        # tk.CTkLabel(self, bg_color="red").pack(expand=True, fill="both")
+
+        switch_button = tk.CTkButton(parent, text="Button Switch", command=switch_press)
         switch_button.pack()
 
 
@@ -70,7 +92,11 @@ class BridgeTab(tk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
-        bridge_button = tk.CTkButton(parent, text="Button Bridge")
+        # tk.CTkLabel(self, bg_color="blue").pack(expand=True, fill="both")
+
+        bridge_button = tk.CTkButton(
+            parent, text="Button Bridge", command=brridge_press
+        )
         bridge_button.pack()
 
 
