@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "Air Drop Bot",
-    "version": "0.1.0"
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -28,7 +28,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "studio.pesiq.AirDropBot",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

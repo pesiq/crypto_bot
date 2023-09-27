@@ -21,7 +21,7 @@ interface InputBoxParams {
 
 export function InputBox ( {title, button, desc }: InputBoxParams) {
     return(
-    <Card>
+    <Card className="m-20">
         <CardHeader>
             <CardTitle>{title}</CardTitle>
             <CardDescription>{desc}</CardDescription>
@@ -30,11 +30,11 @@ export function InputBox ( {title, button, desc }: InputBoxParams) {
             <form>
                 <div className="grid w-full items-center gap-4">
                     <div className="flex flex-col space-y-1.5">
-                        <Label>From</Label>
+                        <Label>From Откуда</Label>
                         <Input id="input-1" placeholder="cum" />
                     </div>
                     <div className="flex flex-col space-y-1.5">
-                        <Label>To</Label>
+                        <Label>To Куда</Label>
                         <Input id="input-2" placeholder="balls" />
                     </div>
                 </div>
