@@ -23,7 +23,7 @@ import Link from "next/link";
             key = {href} 
             href ={href}
         >
-            <Card>
+            <Card className="p-2 m-4">
                 <CardHeader>
                     <CardTitle>
                         {name}

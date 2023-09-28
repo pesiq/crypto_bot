@@ -31,7 +31,7 @@ const sidebarNavItems = [
             items={sidebarNavItems}
             className="fixed left-0 w-20 flex flex-col h-full py-20"
             />
-                {}
+                {children}
         </div>
     )
   }

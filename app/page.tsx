@@ -10,7 +10,7 @@ export default function Home(){
 
   return(
     <>
-      <div>
+      <div className="h-screen w-full flex justify-center my-20">
         <PJCard name="Starknet" href="/starknet"/>
       </div>
     </>
