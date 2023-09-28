@@ -29,13 +29,15 @@ const sidebarNavItems = [
           <div>
               <Dashboard/>
             </div>
-            <div className="h-screen">
+            <div className="flex">
+            <div className="">
               <Sidebar 
               items={sidebarNavItems}
-              className="left-0 w-28 flex-col"
+              className="left-0 w-28 flex flex-col h-screen"
               />
             </div>
-            <div className="flex">{children}</div>
+            <div>{children}</div>
+            </div>
         </div>
     )
   }

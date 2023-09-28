@@ -9,7 +9,7 @@ export default function Starknet(){
 
     return(
         <>
-        <div className="bg-red-900 h-full">
+        <div className="bg-red-900 flex">
             <InputBox button="KYS!!!" desc="idfk" title="Gay" />
         </div>
         </>
