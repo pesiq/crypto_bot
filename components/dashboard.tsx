@@ -4,9 +4,11 @@ import { Settings } from "lucide-react"
 
 import { 
     Menubar,
+    MenubarContent,
     MenubarMenu,
     MenubarSeparator,
-    MenubarTrigger
+    MenubarTrigger,
+    MenubarItem
 
  } from "./ui/menubar"
  import { Button } from "./ui/button"
@@ -15,6 +17,7 @@ import {
     TabsTrigger,
     TabsList
  } from "./ui/tabs"
+import Link from "next/link"
 
 
 
@@ -23,16 +26,18 @@ export function Dashboard () {
     return(
         <Menubar className="">
             <MenubarMenu>
-                <MenubarTrigger className="m-1"> <Settings /> </MenubarTrigger>
-                <div className="justify-center">
-                    <Tabs>
-                        <TabsList>
-                                <TabsTrigger value="swap"> Swap </TabsTrigger>
-                                <TabsTrigger value="bridge" disabled> Bridge </TabsTrigger>
-                                <TabsTrigger value="withdraw" disabled> Withdraw </TabsTrigger>
-                        </TabsList>
-                    </Tabs>
-                </div>
+                <MenubarTrigger className="m-1"> Settings </MenubarTrigger>
+                <MenubarContent>
+                    <MenubarItem>
+                        <Link
+                            key="/"
+                            href="/"
+                        >
+                            Change proj
+                        </Link>
+                        </MenubarItem>
+                </MenubarContent>
+                
             </MenubarMenu>
         </Menubar>
     )

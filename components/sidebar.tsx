@@ -1,43 +1,49 @@
 "use client"
 
-import { Button } from "./ui/button"
+import { Button, buttonVariants } from "./ui/button"
 import { Separator } from "./ui/separator"
-import { Settings, Shuffle, ArrowLeftRight } from "lucide-react"
+import { Settings, Shuffle, ArrowLeftRight} from "lucide-react"
+import { cn } from "@/lib/utils"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
 
+interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
+    items: {
+      href: string
+      title: string
+    }[]
+}
 
+export function Sidebar( {className, items, ...props}: SidebarNavProps ){
 
-export function Sidebar(){
-
+    const pathname = usePathname()
 
     return(
-    <div className="fixed top-0 left-0 h-screen flex flex-col py-7 w-24">
-        <h2 className="text-center">
-            Main
-        </h2>
-        <div className="space-y-1 p-1">
-            <Button variant="secondary" className="w-full"
-            onClick={() => {console.log("Swap clicked")}}
-            > 
-                <Shuffle /> Swap
-            </Button>
-            <Button variant="secondary" className="w-full" disabled> 
-                <ArrowLeftRight/>Bridge
-            </Button>
-            <Button variant="secondary" className="w-full" disabled> 
-                Withdraw
-            </Button>
-        </div>
-        <Separator  className="my-1"/>
-        <h2 className="text-center">
-            Misc
-        </h2>
-        <Button>
-            Logs
-        </Button>
-        <Button className="">
-            <Settings className=""/>
-        </Button>
-    </div>
+    <nav 
+    className={cn(
+        "flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1", className
+    )}
+    {...props}
+    >
+        {items.map((item) => (
+            <Link
+            key={item.href}
+            href={item.href}
+            className={
+                cn(
+                    buttonVariants({ variant: "ghost" }),
+                    pathname === item.href
+                    ? "bg-muted hover:bg-muted"
+                    : "hover:bg-transparent hover:underline",
+                    "justify-start"
+                )
+            }
+            >
+            {item.title}
+            </Link>
+        ))}
+
+    </nav>
     )
 }
 
