@@ -26,12 +26,16 @@ const sidebarNavItems = [
   export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <div>
-            <Dashboard/>
-            <Sidebar 
-            items={sidebarNavItems}
-            className="fixed left-0 w-20 flex flex-col h-full py-20"
-            />
-                {children}
+          <div>
+              <Dashboard/>
+            </div>
+            <div className="h-screen">
+              <Sidebar 
+              items={sidebarNavItems}
+              className="left-0 w-28 flex-col"
+              />
+            </div>
+            <div className="flex">{children}</div>
         </div>
     )
   }

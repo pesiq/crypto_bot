@@ -19,9 +19,10 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
     const pathname = usePathname()
 
     return(
+        <>
     <nav 
     className={cn(
-        "flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1", className
+        "flex items-center rounded-md border bg-background p-2", className
     )}
     {...props}
     >
@@ -34,7 +35,7 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
                     buttonVariants({ variant: "ghost" }),
                     pathname === item.href
                     ? "bg-muted hover:bg-muted"
-                    : "hover:bg-transparent hover:underline",
+                    : "hover:bg-black",
                     "justify-start"
                 )
             }
@@ -44,6 +45,7 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
         ))}
 
     </nav>
+    </>
     )
 }
 

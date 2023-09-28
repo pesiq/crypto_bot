@@ -12,6 +12,7 @@ export default function Home(){
     <>
       <div className="h-screen w-full flex justify-center my-20">
         <PJCard name="Starknet" href="/starknet"/>
+        
       </div>
     </>
   )
