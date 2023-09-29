@@ -22,7 +22,7 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
         <>
     <nav 
     className={cn(
-        "flex items-center rounded-md border bg-background p-2", className
+        "flex items-center rounded-md border bg-background p-2 justify-center", className
     )}
     {...props}
     >
@@ -36,7 +36,7 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
                     pathname === item.href
                     ? "bg-muted hover:bg-muted"
                     : "hover:bg-black",
-                    "justify-start"
+                    "justify-start m-2"
                 )
             }
             >

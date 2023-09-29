@@ -1,8 +1,11 @@
 
 
+
 export function LogPanel () {
 
     return (
-        
+        <>
+
+        </>
     )
 }
