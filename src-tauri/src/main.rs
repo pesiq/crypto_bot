@@ -1,6 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use rand::{distributions::Alphanumeric, Rng};
+use tauri::Manager;
 
 
 fn main() {
@@ -24,4 +25,15 @@ fn random_str(len: usize) -> String{
   .collect();
   println!("{}", res);
   format!("{}", res)
+}
+
+
+#[derive(Clone, serde::Serialize)]
+struct Payload {
+  message: String,
+}
+
+#[tauri::command]
+async fn test_api_handle(app: tauri::AppHandle){
+  app.emit_all("Synced!!!", Payload { message: "I want to kill myself".into() }).unwrap();
 }
