@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Dashboard } from '@/components/dashboard'
 import { Sidebar } from '@/components/sidebar'
+import { cn } from '@/lib/utils'
 
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
@@ -19,7 +20,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={
+        cn(
+          inter.className,
+          ""
+        )
+      }>
         <ThemeProvider 
           attribute='class'
           defaultTheme='dark'
