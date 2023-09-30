@@ -30,7 +30,7 @@ const sidebarNavItems = [
     return(
       <div className="h-screen overflow-hidden">
           <div>
-            <Dashboard />
+            
           </div>
           <div className="flex">
             <div className="flex left-0 w-28 h-[calc(100vh-41px)]">
