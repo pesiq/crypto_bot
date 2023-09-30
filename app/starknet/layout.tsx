@@ -19,8 +19,12 @@ const sidebarNavItems = [
       href: "/starknet/bridge"
     },
     {
-        title: "Settings",
-        href: "/starknet/settings"
+      title: "Settings",
+      href: "/starknet/settings"
+    },
+    {
+      title: "Back",
+      href: "/"
     }
   ]
 
@@ -33,10 +37,10 @@ const sidebarNavItems = [
             
           </div>
           <div className="flex">
-            <div className="flex left-0 w-28 h-[calc(100vh-41px)]">
+            <div className="flex left-0 w-28 h-screen">
               <Sidebar items={sidebarNavItems} className="flex-col h-fill"/>
             </div>
-              <div className="flex flex-col h-[calc(100vh-41px)] overflow-hidden ml-2 w-full">
+              <div className="flex flex-col h-screen overflow-hidden ml-2 w-full">
 
                 <div className="h-min overflow-y-scroll">
                   {children}

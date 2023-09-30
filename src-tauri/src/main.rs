@@ -1,20 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use rand::{distributions::Alphanumeric, Rng};
-use tauri::{CustomMenuItem, Manager, Menu, State, Submenu};
+use tauri::{CustomMenuItem, Manager, Menu, Submenu};
 
 
 fn main() {
 
-  let menu = Menu::new().add_submenu(Submenu::new(
-    "Record",
-    Menu::new()
-        .add_item(CustomMenuItem::new("set_directory", "Set Directory"))
-        .add_item(CustomMenuItem::new("start", "Start")),
-));
-
   tauri::Builder::default()
-    .menu(menu)
     .invoke_handler(tauri::generate_handler![goto_main, test_api_handle, random_str])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
