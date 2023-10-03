@@ -8,10 +8,9 @@ import { Sidebar } from "@/components/sidebar"
 export default function Starknet(){
 
     return(
-        <>
-        <div className="bg-red-900 flex">
-            <InputBox button="Button" desc="idfk" title="Input form" />
+        <div>
+            <p>Main page for adding wallets, maybe some general settings</p>
+            <p>Maybe add some overview for wallets</p>
         </div>
-        </>
     )
 }

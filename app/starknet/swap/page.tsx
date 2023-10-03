@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Box() {
 
     const bruh = () => {
-        console.log("envoked btuh");
-        redirect('/');
+        console.log("envoked bruh");
+        redirect('/starknet/bridge');
     }
 
 
@@ -64,104 +65,48 @@ function Box() {
     )
 }
 
-function TBox () {
+const DocsButton = () => {
 
-    type Payload = {
-        message: string;
-    };
-    
-
-    async function orderLinstener() {
-        await listen<Payload>('order', (event) => {
-            console.log("Hehehehhe: " + event.payload.message);
-            redirect('/')
-        });
+    async function openWindow () {
+        await invoke ('open_docs')
+        .then( () => {
+            console.log("Called")
+        })
+        .catch(()=>{
+            console.log("Failed to open window")
+        })
     }
-
-    async function invokeOrder() {
-        await invoke('goto_main')
-    }
-
-    useEffect( () => {
-        orderLinstener();
-    }, [])
 
     return(
         <div>
-            <Button
-                onClick={invokeOrder}
-            >Go to main</Button>
+            <Button onClick={openWindow}> Docs Window</Button>
         </div>
     )
 }
 
-function FBox(){
 
-
-    type Payload = {
-        message: string;
-    };
-    
-    const [message, setMessage] = useState("")
-
-
-    async function startSerialEventListener() {
-        await listen<Payload>('Synced', (event) => {
-            console.log("Event triggered from rust!\nPayload: " + event.payload.message);
-            setMessage(event.payload.message)
-        });
-    }
-
-    
-    
-    const [status, setStatus] = useState("")
-    async function invokeEmitter() {
-        await invoke('test_api_handle')
-        .then(() => {
-            setStatus("Invoked")
-        })
-        .catch( (err) => {
-            setStatus("Error, somehow: " + err)
-        })
-    }
-
-
-    useEffect( () => {
-        startSerialEventListener();
-    }, [])
-
-
-
-    return (
-        <div>
-            <div>
-            <Button
-            onClick={invokeEmitter}
-            >
-                Call emitter
-            </Button>
-            <div>
-                <h1>Status</h1>
-                {status}
-            </div>
-            <div>
-                <h1> Response </h1>
-                {message}
-            </div> 
-
-            </div>
-        </div>
-    )
-
-}
 
 export default function Swap(){
 
+
+    async function openLink(link: string){
+        await invoke('open_link', {link: link})
+        .then( () => 
+            console.log("Attemting to open a webview window")
+        )
+        .catch( () => {
+            console.log("Couldn't open window")
+        })
+    }
+
+    const href = "google.com"
 
     return(
 
         <div>
             <Box />
+            <DocsButton />
+            
         </div>
     )
 }
