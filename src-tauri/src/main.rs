@@ -3,6 +3,7 @@
 
 use tauri::{CustomMenuItem, Menu, Submenu};
 mod commands;
+mod starkgate;
 
 
 fn main() {
@@ -22,7 +23,8 @@ fn main() {
       commands::test_api_handle, 
       commands::random_str,
       commands::open_docs,
-      commands::open_link
+      commands::open_link,
+      starkgate::check_balance
       ])
 
     .run(tauri::generate_context!())

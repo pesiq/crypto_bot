@@ -84,7 +84,24 @@ const DocsButton = () => {
     )
 }
 
+const Web3button = () => {
 
+    async function w3call () {
+        await invoke ('check_balance')
+        .then( () => {
+            console.log("Checking balance")
+        })
+        .catch(() => {
+            console.log("Failed to check balance")
+        })
+    }
+
+    return(
+        <div>
+            <Button onClick={w3call}>Check balance</Button>
+        </div>
+    )
+}
 
 export default function Swap(){
 
@@ -106,7 +123,7 @@ export default function Swap(){
         <div>
             <Box />
             <DocsButton />
-            
+            <Web3button />
         </div>
     )
 }
