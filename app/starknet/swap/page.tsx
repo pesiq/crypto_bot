@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
 
 function Box() {
 
@@ -86,8 +87,10 @@ const DocsButton = () => {
 
 const Web3button = () => {
 
-    async function w3call () {
-        await invoke ('check_balance')
+    const [adress, setAdress] = useState("");
+
+    async function w3call (adr: String) {
+        await invoke ('check_balance', {adress: adr})
         .then( () => {
             console.log("Checking balance")
         })
@@ -98,7 +101,12 @@ const Web3button = () => {
 
     return(
         <div>
-            <Button onClick={w3call}>Check balance</Button>
+            <Input id="adress_input" placeholder="enter adress to check" onChange={
+                e => setAdress(e.currentTarget.value)
+            }/>
+            <Button onClick={() => {
+                w3call(adress)
+            }}>Check balance</Button>
         </div>
     )
 }

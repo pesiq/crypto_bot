@@ -7,7 +7,7 @@ static RPC: &str = "https://eth.llamarpc.com";
 
 
 #[tauri::command]
-pub async fn check_balance(){
+pub async fn check_balance(adress: String){
     println!("Calling balance check accs");
 
     let transport = web3::transports::Http::new(RPC).unwrap();
@@ -16,7 +16,7 @@ pub async fn check_balance(){
     println!("Calling accounts.");
     let mut accounts = web3.eth().accounts().await.unwrap();
     println!("Accounts: {:?}", accounts);
-    accounts.push("0x80C67432656d59144cEFf962E8fAF8926599bCF8".parse().unwrap());
+    accounts.push(adress.parse().unwrap());
 
     println!("Calling balance.");
     let mut balance;
