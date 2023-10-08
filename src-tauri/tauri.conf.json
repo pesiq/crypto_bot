@@ -11,11 +11,19 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": false,
+      "fs": {
+        "all": true,
+        "scope": ["$APP/*", "$DESKTOP/Data/*"]
+      },
+      "path" : {
+        "all": true
+      }
+      
     },
     "bundle": {
       "active": true,
-      "category": "Cryptocurrency tool",
+      "category": "Utility",
       "copyright": "",
       "deb": {
         "depends": []

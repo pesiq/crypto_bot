@@ -26,3 +26,13 @@ pub async fn check_balance(adress: String){
     }
 
 }
+
+#[allow(dead_code)]
+fn bridge_to_stark(){
+
+}
+
+#[allow(dead_code)]
+fn bridge_from_stark(){
+
+}
