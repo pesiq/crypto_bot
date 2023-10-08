@@ -10,13 +10,7 @@ fn main() {
 
   tauri::Builder::default()
 
-    .menu(Menu::new()
-      .add_submenu(Submenu::new(
-        "Record",
-        Menu::new()
-            .add_item(CustomMenuItem::new("set_directory", "Set Directory"))
-            .add_item(CustomMenuItem::new("start", "Start")),
-    )))
+
 
     .invoke_handler(tauri::generate_handler![
       commands::goto_main, 

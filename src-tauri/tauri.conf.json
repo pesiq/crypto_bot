@@ -7,16 +7,19 @@
   },
   "package": {
     "productName": "Air Drop Bot",
-    "version": "0.0.4"
+    "version": "0.0.5"
   },
   "tauri": {
     "allowlist": {
       "all": false,
       "fs": {
         "all": true,
-        "scope": ["$APP/*", "$DESKTOP/Data/*"]
+        "scope": ["$APP/*", "$APPDATA/*", "$APPDATA/Data/*"]
       },
       "path" : {
+        "all": true
+      },
+      "dialog": {
         "all": true
       }
       
@@ -36,7 +39,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "studio.pesiq.AirDropBot",
+      "identifier": "AirDropBot",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

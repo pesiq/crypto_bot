@@ -8,25 +8,17 @@ import { redirect } from "next/navigation";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
+import { Web3button } from "./test";
 
 function Box() {
 
-    const bruh = () => {
-        console.log("envoked bruh");
-        redirect('/starknet/bridge');
-    }
+
 
 
     type Payload = {
         message: string;
     };
 
-    async function listener1(){
-        await listen<Payload>('order', (event) => {
-            console.log(event.payload.message)
-            bruh();
-        })
-    }
 
     async function listener2(){
         await listen<Payload>('Synced', (event) => {
@@ -34,26 +26,17 @@ function Box() {
         })
     }
 
-    async function invokeOrder() {
-        await invoke('goto_main')
-    }
 
     async function invokeEmitter() {
         await invoke('test_api_handle')
     }
 
     useEffect( () => {
-        listener1();
         listener2();
     })
 
     return(
         <div>
-            <div>
-            <Button
-                onClick={invokeOrder}
-            >Go to main</Button>
-            </div>
             <div>
             <Button
             onClick={invokeEmitter}
@@ -85,31 +68,7 @@ const DocsButton = () => {
     )
 }
 
-const Web3button = () => {
 
-    const [adress, setAdress] = useState("");
-
-    async function w3call (adr: String) {
-        await invoke ('check_balance', {adress: adr})
-        .then( () => {
-            console.log("Checking balance")
-        })
-        .catch(() => {
-            console.log("Failed to check balance")
-        })
-    }
-
-    return(
-        <div>
-            <Input id="adress_input" placeholder="enter adress to check" onChange={
-                e => setAdress(e.currentTarget.value)
-            }/>
-            <Button onClick={() => {
-                w3call(adress)
-            }}>Check balance</Button>
-        </div>
-    )
-}
 
 export default function Swap(){
 
