@@ -1,12 +1,10 @@
 
 
-use std::str::FromStr;
-
-use tauri::{Manager, AppHandle};
+use tauri::{Manager};
 use web3;
 use web3::types::{H160, U256};
 
-static RPC: &str = "https://eth.llamarpc.com";
+
 
 
 
@@ -41,8 +39,8 @@ fn emit_balance(app: tauri::AppHandle, wei_bal: U256, acc: H160){
     let res = wei_bal.as_u128() as f64 / 1_000_000_000_000_000_000.0;
     println!("Emitting balance");
     app.emit_all("balance", Payload {
-        account: acc.clone(),
-        balance: res.clone()
+        account: acc,
+        balance: res
     }).unwrap();
 
 }

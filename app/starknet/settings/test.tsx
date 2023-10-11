@@ -2,9 +2,11 @@
 
 
 import { invoke } from '@tauri-apps/api/tauri'
+import { emit } from '@tauri-apps/api/event'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+
 
 export const TestInvoker = () => {
 
@@ -23,6 +25,9 @@ export const TestInvoker = () => {
 
     }
 
+    const emitter = () => {
+        emit('log', {message: "Test emission"})
+    }
     
     
     return(
@@ -38,6 +43,7 @@ export const TestInvoker = () => {
                 }}
             >Get string</Button>
             {displayThing}
+            <Button onClick={emitter}>Log test</Button>
         </div>
         </>
     )

@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "Air Drop Bot",
-    "version": "0.0.5"
+    "version": "0.0.7"
   },
   "tauri": {
     "allowlist": {
