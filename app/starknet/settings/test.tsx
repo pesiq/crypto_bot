@@ -26,7 +26,7 @@ export const TestInvoker = () => {
     }
 
     const emitter = () => {
-        emit('log', {message: "Test emission"})
+        emit('log', {message: "Test emission\n"})
     }
     
     

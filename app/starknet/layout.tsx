@@ -44,7 +44,9 @@ const sidebarNavItems = [
                 <div className="h-min overflow-y-scroll">
                   {children}
                 </div>
+                <div className=" bg-red-200">
                   <LogPanel />
+                </div>
             </div>
           </div>
       </div>
