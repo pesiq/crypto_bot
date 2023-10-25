@@ -25,8 +25,6 @@ export function LogPanel () {
         message: string
     }
 
-    //const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
-
     const msgListener = async () => {
         await listen<msgPayload>("log", event => {
             newMsg(event.payload.message);
@@ -34,6 +32,7 @@ export function LogPanel () {
     }
 
     const newMsg = (msg: string) => {
+        var timestamp = 
         setMessages( messages => messages.concat(msg));
     }
 
