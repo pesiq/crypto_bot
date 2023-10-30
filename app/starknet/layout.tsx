@@ -45,7 +45,7 @@ const sidebarNavItems = [
                   {children}
                 </div>
                 <div className=" bg-red-200">
-                  <LogPanel />
+                  <LogPanel className="w-[calc(100%-150px)]"/>
                 </div>
             </div>
           </div>

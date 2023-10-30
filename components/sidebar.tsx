@@ -6,6 +6,7 @@ import { Settings, Shuffle, ArrowLeftRight} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { ChevronLeft } from "lucide-react"
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
     items: {
@@ -40,7 +41,7 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
                 )
             }
             >
-            {item.title}
+            {item.title =="Back" ? <ChevronLeft className="align-left"/>  :item.title}
             </Link>
         ))}
 

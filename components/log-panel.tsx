@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { listen } from '@tauri-apps/api/event'
 import { createElement } from "react"
+import { cn } from "@/lib/utils"
 
 interface msgArg {
     text: string
@@ -17,7 +18,7 @@ const Message = ( {text}: msgArg ) => {
     )
 }
 
-export function LogPanel () {
+export function LogPanel ({className, ...props}: React.HTMLAttributes<HTMLElement>) {
 
     const [messages, setMessages] = useState<string>("")
 
@@ -50,7 +51,11 @@ export function LogPanel () {
 
     return (
 
-            <div ref={scrollRef} className="flex-col fixed bottom-4 h-1/5 w-[calc(100%-150px)] bg-secondary overflow-y-scroll mx-3 p-5 rounded-md">
+            <div ref={scrollRef} 
+            className={
+                cn( "flex-col fixed bottom-4 h-1/5 bg-secondary overflow-y-scroll mx-3 p-5 rounded-md",
+                className)
+            }>
                 {messages.split('\n').map( msg => (
                     <Message text={msg}/>
                 ))}
