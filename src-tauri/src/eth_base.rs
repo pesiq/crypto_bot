@@ -1,7 +1,7 @@
 
-
-use tauri::Manager;
+use tauri;
 use web3;
+use super::account;
 
     /*
     Need to make generic trait fr account to login to acc
@@ -21,11 +21,17 @@ use web3;
         do swap(from, to, min/max amount, )
         
      */
+#[derive(Clone, serde::Serialize)]
+struct SwapPayload{
+    from: String,
+    to: String,
+    min: i32,
+    max: i32,
+    
+}
 
-#[tarui::command]
+#[tauri::command]
 fn swap(){
-
-
 
 
 

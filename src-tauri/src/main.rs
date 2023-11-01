@@ -1,9 +1,11 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::{CustomMenuItem, Menu, Submenu};
+//use tauri::{CustomMenuItem, Menu, Submenu};
 mod commands;
 mod common;
+mod account;
+mod eth_base;
 
 
 fn main() {
@@ -18,7 +20,6 @@ fn main() {
       commands::random_str,
       commands::open_docs,
       commands::open_link,
-      common::check_balance
       ])
 
     .run(tauri::generate_context!())

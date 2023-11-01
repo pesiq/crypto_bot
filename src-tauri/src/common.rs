@@ -1,6 +1,7 @@
 
 use tauri::Manager;
 use web3;
+use web3::signing::SecretKey;
 use web3::types::{H160, U256};
 
 #[tauri::command]
@@ -39,3 +40,5 @@ fn emit_balance(app: tauri::AppHandle, wei_bal: U256, acc: H160){
     }).unwrap();
 
 }
+
+

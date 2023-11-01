@@ -1,5 +1,24 @@
 
+use tauri;
+use web3::signing::SecretKey;
 
-pub trait Account{
 
+
+/*
+Struct created for each account used
+
+Functions/methods required:
+
+    Approve
+    Sign
+    Wait for tx finish
+    Estimate gas
+    Get balance
+
+*/
+
+
+pub struct AccountInfo{
+    id: i32,
+    private_key: SecretKey,
 }
