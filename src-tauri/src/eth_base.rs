@@ -14,12 +14,27 @@ use super::account;
     if low transaction can fail
     */
 
-    /*
-        get contract
-        get pool
+    /*  
+    Module functions and methods
 
-        do swap(from, to, min/max amount, )
+        Estimate gas
+            Estimate gas usage for assembled tx
         
+
+        Swap function should:
+            Deternite if swap fron or to ETH
+                and act accordingly
+
+            swap to token/eth should:
+                create transaction
+
+            sign stransaction
+
+            send transaction
+
+            ack tx finish
+            
+
      */
 #[derive(Clone, serde::Serialize)]
 struct SwapPayload{
@@ -27,7 +42,7 @@ struct SwapPayload{
     to: String,
     min: i32,
     max: i32,
-    
+
 }
 
 #[tauri::command]

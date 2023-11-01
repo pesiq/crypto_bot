@@ -12,7 +12,6 @@ Functions/methods required:
     Approve
     Sign
     Wait for tx finish
-    Estimate gas
     Get balance
 
 */
