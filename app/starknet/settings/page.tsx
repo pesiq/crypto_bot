@@ -1,6 +1,6 @@
 "use client"
 import { BaseDirectory, createDir, writeTextFile} from "@tauri-apps/api/fs"
-import { TestInvoker, TestGas } from "./test"
+import { TestInvoker, TestGas, TestContract } from "./test"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { open } from '@tauri-apps/api/dialog';
@@ -73,6 +73,7 @@ const openDialog = async () => {
             <div>{selected}</div>
                 <TestInvoker />
                 <TestGas />
+                <TestContract />
             </div>
     )
 }

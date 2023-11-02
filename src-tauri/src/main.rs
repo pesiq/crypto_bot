@@ -18,6 +18,7 @@ fn main() {
       utils::commands::random_str,
       modules::common::check_balance,
       modules::common::get_gas,
+      modules::eth_base::make_swaps,
       ])
 
     .run(tauri::generate_context!())

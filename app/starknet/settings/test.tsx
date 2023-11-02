@@ -71,3 +71,22 @@ export const TestGas = () => {
         </div>
     )
 }
+
+export const TestContract = () => {
+
+    const invokeSwap = async () =>{
+        await invoke('make_swaps')
+        .then((result: any) => {
+            console.log(result)
+        })
+        .catch((err: any) => {
+            console.log(err)
+        })
+    }
+
+    return(
+        <div>
+            <Button onClick={ () => {invokeSwap()}}> Make swaps</Button>
+        </div>
+    )
+}
