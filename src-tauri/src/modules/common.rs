@@ -1,7 +1,7 @@
 
 use tauri::Manager;
 use web3;
-use web3::signing::SecretKey;
+//use web3::signing::SecretKey;
 use web3::types::{H160, U256};
 
 const ETH: f64 = 1_000_000_000_000_000_000.0;
@@ -46,7 +46,7 @@ fn emit_balance(app: tauri::AppHandle, wei_bal: U256, acc: H160){
 
 
 #[derive(Clone, serde::Serialize)]
-struct gasPL {
+struct GasPl {
     message: f64
   }
 
@@ -58,7 +58,7 @@ pub async fn get_gas(app: tauri::AppHandle){
     let gas_price = w3.eth().gas_price().await.unwrap();
     let gas_price = gas_price.as_u128() as f64 / GWEI;
     println!("{}", gas_price);
-    app.emit_all("gas_price", gasPL {
+    app.emit_all("gas_price", GasPl {
         message: gas_price
     }).unwrap();
 }
