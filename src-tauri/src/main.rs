@@ -2,10 +2,9 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 //use tauri::{CustomMenuItem, Menu, Submenu};
-mod commands;
-mod common;
-mod account;
-mod eth_base;
+
+mod modules;
+mod utils;
 
 
 fn main() {
@@ -15,11 +14,12 @@ fn main() {
 
 
     .invoke_handler(tauri::generate_handler![
-      commands::goto_main, 
-      commands::test_api_handle, 
-      commands::random_str,
-      commands::open_docs,
-      commands::open_link,
+      utils::commands::goto_main, 
+      utils::commands::test_api_handle, 
+      utils::commands::random_str,
+      utils::commands::open_docs,
+      utils::commands::open_link,
+      modules::common::check_balance,
       ])
 
     .run(tauri::generate_context!())

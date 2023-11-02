@@ -34,6 +34,7 @@
     "@tauri-apps/cli": "^1.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "cryptocurrency-icons": "^0.18.1",
     "lucide-react": "^0.279.0",
     "next": "latest",
     "next-themes": "^0.2.1",
