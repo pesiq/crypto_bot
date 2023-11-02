@@ -1,12 +1,14 @@
 
 use tauri;
-use web3::signing::SecretKey;
+use web3::{signing::SecretKey, Transport};
 
 
 
 
 /*
 Struct created for each account used
+
+ideally each struct should save auth info
 
 Functions/methods required:
 
@@ -18,7 +20,10 @@ Functions/methods required:
 */
 
 
-pub struct AccountInfo{
-    id: i32,
-    private_key: SecretKey,
-}
+
+
+// pub struct Account{
+//     id: i32,
+//     private_key: SecretKey,
+
+// }

@@ -13,13 +13,11 @@ fn main() {
 
 
 
-    .invoke_handler(tauri::generate_handler![
-      utils::commands::goto_main, 
+    .invoke_handler(tauri::generate_handler![ 
       utils::commands::test_api_handle, 
       utils::commands::random_str,
-      utils::commands::open_docs,
-      utils::commands::open_link,
       modules::common::check_balance,
+      modules::common::get_gas,
       ])
 
     .run(tauri::generate_context!())

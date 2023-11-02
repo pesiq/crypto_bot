@@ -1,6 +1,6 @@
 "use client"
 import { BaseDirectory, createDir, writeTextFile} from "@tauri-apps/api/fs"
-import { TestInvoker } from "./test"
+import { TestInvoker, TestGas } from "./test"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { open } from '@tauri-apps/api/dialog';
@@ -12,7 +12,7 @@ import { useState } from "react"
 
 export default function Settings(){
 
-    const [path, setPath] = useState("")
+    //const [path, setPath] = useState("")
 
     const createDataFolder = async () => {
         await createDir("Data", {
@@ -45,9 +45,10 @@ const [selected, setSelected] = useState("");
 
 const openDialog = async () => {
     await open({
-        multiple: true,
+        multiple: false,
     })
     .then( result => {
+        console.log(result)
         setSelected(String(result));
         console.log(selected)
     })
@@ -66,10 +67,12 @@ const openDialog = async () => {
                 <Button onClick={openDialog}>Open</Button>
                 <Button onClick={createDataFolder}>Create folder</Button>
                 <Button onClick={createDataFile}>Create file</Button>
+
                 {}
             </div>
             <div>{selected}</div>
                 <TestInvoker />
+                <TestGas />
             </div>
     )
 }

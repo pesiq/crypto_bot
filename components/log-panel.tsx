@@ -5,6 +5,7 @@ import { listen } from '@tauri-apps/api/event'
 import { createElement } from "react"
 import { cn } from "@/lib/utils"
 import Image  from "next/image"
+import { Scroll } from "lucide-react"
 //import "@/node_modules/cryptocurrency-icons"
 
 interface msgArg {
@@ -47,8 +48,15 @@ export function LogPanel ({className, ...props}: React.HTMLAttributes<HTMLElemen
 
     // adds new message to log panel
 
+    const lz = (num: any) => { return String(num).padStart(2, '0')}
+
     const newMsg = (msg: string) => {
-        setMessages( messages => messages.concat(msg));
+        var timestamp = new Date;
+        var hrs = timestamp.getHours();
+        var mins = timestamp.getMinutes();
+        var sec = timestamp.getSeconds()
+        var nmsg = lz(hrs) + ':' + lz(mins) + ':' + lz(sec) + ':   ' + msg
+        setMessages( messages => messages.concat(nmsg));
     }
 
     // hook msg listener 
@@ -71,17 +79,35 @@ export function LogPanel ({className, ...props}: React.HTMLAttributes<HTMLElemen
         })
     })
 
-    const scrollRef = useRef<HTMLDivElement>(null);
-    // scroll to bottom
-    function scrollToBottom() {
-        scrollRef.current?.scrollIntoView({behavior: 'smooth'})
-    };
+    //gas listener
+    useEffect( () => {
+        const unlisten = listen<msgPayload>("gas_price", event => {
+            newMsg("Current recomended gas price: " + event.payload.message + ' GWEI \n')
+        })
+        
+        return( () => {
+            unlisten.then(f => f())
+        })
+    })
 
-    useEffect(scrollToBottom, [messages]);
+    const container = useRef<HTMLDivElement>(null)
+
+    // auto scroll to bottom
+    const Scroll = () => {
+        const { offsetHeight, scrollHeight, scrollTop } = container.current as HTMLDivElement
+        if (scrollHeight <= scrollTop + offsetHeight + 100) {
+          container.current?.scrollTo(0, scrollHeight)
+        }
+      }
+
+    useEffect(() => {
+        Scroll()
+    }, [messages])
+
 
     return (
 
-            <div ref={scrollRef} 
+            <div ref={container} 
             className={
                 cn( "flex-col fixed bottom-4 h-1/5 bg-secondary overflow-y-scroll mx-3 p-5 rounded-md",
                 className)

@@ -52,3 +52,7 @@ fn swap(){
 
     //get contract
 }
+
+fn estimate_gas(){
+    
+}

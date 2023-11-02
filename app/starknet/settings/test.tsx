@@ -28,6 +28,8 @@ export const TestInvoker = () => {
     const emitter = () => {
         emit('log', {message: "Test emission\n"})
     }
+
+
     
     
     return(
@@ -46,5 +48,26 @@ export const TestInvoker = () => {
             <Button onClick={emitter}>Log test</Button>
         </div>
         </>
+    )
+}
+
+
+export const TestGas = () => {
+
+    const invokeGas = async () =>{
+        await invoke('get_gas')
+        .then((result: any) => {
+            console.log(result)
+        })
+        .catch((err: any) => {
+            console.log(err)
+        })
+    }
+
+
+    return(
+        <div>
+            <Button onClick={ () => {invokeGas()}}>Get gas price</Button>
+        </div>
     )
 }
