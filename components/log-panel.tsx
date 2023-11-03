@@ -113,7 +113,7 @@ export function LogPanel ({className, ...props}: React.HTMLAttributes<HTMLElemen
                 className)
             }>
                 {messages.split('\n').map( msg => (
-                    <Message text={msg}/>
+                    <Message key={Date.now()} text={msg}/>
                     
                 ))}
             </div>

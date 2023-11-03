@@ -97,9 +97,11 @@ fn swap(){
 
 
 #[tauri::command]
-pub async fn make_swaps(){
+pub async fn make_swaps(app: tauri::AppHandle){
 
-    let file = File::open("D:/Projects/crypto_bot/package/aerodrome_abi.json").unwrap();
+    let path = app.path_resolver().resolve_resource("package/ABI/aerodrome_abi.json").expect("failed to resolve resource");
+    println!("{}", path.clone().into_os_string().into_string().unwrap());
+    let file = File::open(&path).unwrap();
     let abi = web3::ethabi::Contract::load(file).unwrap();
 
 

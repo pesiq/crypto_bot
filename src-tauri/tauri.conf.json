@@ -13,8 +13,7 @@
     "allowlist": {
       "all": false,
       "fs": {
-        "all": true,
-        "scope": ["$APP/*", "$APPDATA/*", "$APPDATA/Data/*"]
+        "scope": ["$APP/*", "$RESOURCE/*"]
       },
       "path" : {
         "all": true
@@ -48,7 +47,9 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": [],
+      "resources": [
+        "ABI/*"
+      ],
       "shortDescription": "",
       "targets": "all",
       "windows": {
