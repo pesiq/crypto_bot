@@ -1,9 +1,9 @@
 
-use std::fs::File;
+use std::{fs::File, default};
 
 use tauri;
 use serde_json;
-use web3::types::{H160, H256};
+use web3::{types::{H160, H256}, futures::future::ok, ethabi::Address};
 
     /*
     Need to make generic trait fr account to login to acc
@@ -57,6 +57,9 @@ use web3::types::{H160, H256};
             
 
      */
+
+
+
 #[derive(Clone, serde::Serialize)]
 struct SwapPayload{
     from: String,
@@ -66,11 +69,11 @@ struct SwapPayload{
 
 }
 
-fn from_ETH(){
+fn from_eth(){
 
 }
 
-fn to_ETH(){
+fn to_eth(){
     
 }
 
@@ -94,12 +97,13 @@ fn swap(){
 
 
 #[tauri::command]
-pub fn make_swaps(){
+pub async fn make_swaps(){
 
     let file = File::open("D:/Projects/crypto_bot/package/aerodrome_abi.json").unwrap();
     let abi = web3::ethabi::Contract::load(file).unwrap();
 
-    let transport = web3::transports::Http::new("https://eth.llamarpc.com").unwrap();
+
+    let transport = web3::transports::Http::new("https://base.llamarpc.com").unwrap();
     let w3 = web3::Web3::new(transport);
     
     let eth = w3.eth();
@@ -107,8 +111,16 @@ pub fn make_swaps(){
     let adress: H160 = "0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43".parse().unwrap();
     let swap_contract = web3::contract::Contract::new(eth, adress, abi);
 
-    println!("{}", swap_contract.address());
+    let name: Address = swap_contract
+    .query("defaultFactory", (), None, web3::contract::Options::default(), None)
+    .await.unwrap();
+
+
+
+    println!("Router factory >> {}", name);
     //foreach account assemble swap and call swap
+
+
 
     //assemble swap
     //swap_contract: struct with contract adress and abi
