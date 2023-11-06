@@ -1,9 +1,10 @@
 
-use std::{fs::File, default};
+use std::{fs::File, default, hash::BuildHasherDefault, str::FromStr};
 
 use tauri;
 use serde_json;
-use web3::{types::{H160, H256}, futures::future::ok, ethabi::Address};
+use web3::{types::{H160, H256}, signing::{SecretKey, SecretKeyRef}, api::Namespace};
+use hex;
 
     /*
     Need to make generic trait fr account to login to acc
@@ -89,6 +90,23 @@ fn swap(){
     // get tx from fucntions
 
     // send transaction
+    //web3::api::Eth::send_transaction(&self, tx)
+        /*
+        pub struct TransactionRequest {
+            pub from: Address,
+            pub to: Option<Address>,
+            pub gas: Option<U256>,
+            pub gas_price: Option<U256>,
+            pub value: Option<U256>,
+            pub data: Option<Bytes>,
+            pub nonce: Option<U256>,
+            pub condition: Option<TransactionCondition>,
+            pub transaction_type: Option<U64>,
+            pub access_list: Option<AccessList>,
+            pub max_fee_per_gas: Option<U256>,
+            pub max_priority_fee_per_gas: Option<U256>,
+        }
+        */
 
     //await transaction
 
@@ -106,23 +124,82 @@ pub async fn make_swaps(app: tauri::AppHandle){
 
 
     let transport = web3::transports::Http::new("https://base.llamarpc.com").unwrap();
-    let w3 = web3::Web3::new(transport);
+    let w3 = web3::Web3::new(transport.clone());
     
     let eth = w3.eth();
     //get contract
     let adress: H160 = "0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43".parse().unwrap();
-    let swap_contract = web3::contract::Contract::new(eth, adress, abi);
+    let swap_contract = web3::contract::Contract::new(eth.clone(), adress, abi);
 
-    let name: Address = swap_contract
-    .query("defaultFactory", (), None, web3::contract::Options::default(), None)
-    .await.unwrap();
+    // let name: Address = swap_contract
+    // .query("defaultFactory", (), None, web3::contract::Options::default(), None)
+    // .await.unwrap();
 
 
 
-    println!("Router factory >> {}", name);
+    // println!("Router factory >> {}", name);
     //foreach account assemble swap and call swap
 
+    //to sign transaction need to
+    //need to sign into account using private key
+    //web3 has implementation of account
 
+    /*
+
+    pub struct CallRequest {
+        pub from: Option<Address>,
+        pub to: Option<Address>,
+        pub gas: Option<U256>,
+        pub gas_price: Option<U256>,
+        pub value: Option<U256>,
+        pub data: Option<Bytes>,
+        pub transaction_type: Option<U64>,
+        pub access_list: Option<AccessList>,
+        pub max_fee_per_gas: Option<U256>,
+        pub max_priority_fee_per_gas: Option<U256>,
+    }
+
+
+    pub struct TransactionParameters {
+        pub nonce: Option<U256>,
+        pub to: Option<Address>,
+        pub gas: U256,
+        pub gas_price: Option<U256>,
+        pub value: U256,
+        pub data: Bytes,
+        pub chain_id: Option<u64>,
+        pub transaction_type: Option<U64>,
+        pub access_list: Option<AccessList>,
+        pub max_fee_per_gas: Option<U256>,
+        pub max_priority_fee_per_gas: Option<U256>,
+    }
+
+    pub struct SignedTransaction {
+        pub message_hash: H256,
+        pub v: u64,
+        pub r: H256,
+        pub s: H256,
+        pub raw_transaction: Bytes,
+        pub transaction_hash: H256,
+    }
+     */
+
+    //assemble tx
+
+    let account = web3::api::Accounts::new(transport);
+
+    let tx = web3::types::CallRequest::builder().build();
+
+    let key = SecretKey::from_slice(&hex::decode("").unwrap()).expect("msg");
+    //let key = SecretKeyRef::new(&sk);
+
+    //sign tx
+    let signed_tx = account.sign_transaction(web3::types::TransactionParameters::from(tx), &key).await.unwrap();
+    
+    //send tx
+    let future = eth.send_raw_transaction(signed_tx.raw_transaction).await.unwrap();
+
+    println!("{}", future);
 
     //assemble swap
     //swap_contract: struct with contract adress and abi
