@@ -37,3 +37,7 @@ next-env.d.ts
 # x-platform build
 .cargo
 .xwin-cache
+
+# package
+/src-tauri/ABI/
+/src-tauri/settings/
