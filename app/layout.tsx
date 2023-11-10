@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={
         cn(
           inter.className,
-          ""
+          "overflow-hidden"
         )
       }>
         <ThemeProvider 

@@ -51,8 +51,8 @@ struct GasPl {
   }
 
 #[tauri::command]
-pub async fn get_gas(app: tauri::AppHandle){
-    let transport = web3::transports::Http::new("https://eth.llamarpc.com").unwrap();
+pub async fn get_gas(app: tauri::AppHandle, rpc: String){
+    let transport = web3::transports::Http::new(&rpc).unwrap();
     let w3 = web3::Web3::new(transport);
 
     let gas_price = w3.eth().gas_price().await.unwrap();
@@ -61,4 +61,8 @@ pub async fn get_gas(app: tauri::AppHandle){
     app.emit_all("gas_price", GasPl {
         message: gas_price
     }).unwrap();
+}
+
+async fn get_tx_gas(){
+    
 }

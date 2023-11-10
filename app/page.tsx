@@ -9,11 +9,9 @@ export default function Home(){
 
 
   return(
-    <>
-      <div className="h-screen w-full flex justify-center my-20">
+      <div className="h-screen w-full flex justify-center my-20" >
         <PJCard name="Starknet" href="/starknet"/>
         <PJCard name="Base" href="/base" />
       </div>
-    </>
   )
 }

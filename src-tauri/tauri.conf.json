@@ -48,7 +48,9 @@
         "signingIdentity": null
       },
       "resources": [
-        "ABI/*"
+        "ABI/*",
+        "accounts/*",
+        "settings.bruh"
       ],
       "shortDescription": "",
       "targets": "all",
@@ -67,10 +69,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 720,
         "resizable": true,
         "title": "Air Drop Bot",
-        "width": 800
+        "width": 1200
       }
     ]
   }

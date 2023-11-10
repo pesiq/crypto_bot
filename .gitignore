@@ -40,4 +40,5 @@ next-env.d.ts
 
 # package
 /src-tauri/ABI/
-/src-tauri/settings/
+/src-tauri/settings.bruh
+/src-tauri/accounts/

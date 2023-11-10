@@ -3,8 +3,8 @@ use std::{fs::File, default, hash::BuildHasherDefault, str::FromStr};
 
 use tauri;
 use serde_json;
-use web3::{types::{H160, H256}, signing::{SecretKey, SecretKeyRef}, api::Namespace};
-use hex;
+use web3::{types::{H160, H256}, contract::Contract ,signing::SecretKey, api::Namespace};
+use hexutil;
 
     /*
     Need to make generic trait fr account to login to acc
@@ -78,8 +78,17 @@ fn to_eth(){
     
 }
 
+struct SwapSettings{
+    from: String,
+    to: String,
+    min_amount: f64,
+    max_amount: f64,
+    slippage: i32,
 
-fn swap(){
+}
+
+fn swap(app: tauri::AppHandle, rpc: String, settings: SwapSettings){
+
 
     
     //check swap coin
@@ -117,7 +126,7 @@ fn swap(){
 #[tauri::command]
 pub async fn make_swaps(app: tauri::AppHandle){
 
-    let path = app.path_resolver().resolve_resource("package/ABI/aerodrome_abi.json").expect("failed to resolve resource");
+    let path = app.path_resolver().resolve_resource("ABI/base/aerodrome/aerodrome_abi.json").expect("failed to resolve resource");
     println!("{}", path.clone().into_os_string().into_string().unwrap());
     let file = File::open(&path).unwrap();
     let abi = web3::ethabi::Contract::load(file).unwrap();
@@ -129,7 +138,7 @@ pub async fn make_swaps(app: tauri::AppHandle){
     let eth = w3.eth();
     //get contract
     let adress: H160 = "0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43".parse().unwrap();
-    let swap_contract = web3::contract::Contract::new(eth.clone(), adress, abi);
+    let swap_contract = Contract::new(eth.clone(), adress, abi);
 
     // let name: Address = swap_contract
     // .query("defaultFactory", (), None, web3::contract::Options::default(), None)
@@ -190,16 +199,16 @@ pub async fn make_swaps(app: tauri::AppHandle){
 
     let tx = web3::types::CallRequest::builder().build();
 
-    let key = SecretKey::from_slice(&hex::decode("").unwrap()).expect("msg");
+    let key = SecretKey::from_slice(&hexutil::read_hex("").unwrap()).expect("msg");
     //let key = SecretKeyRef::new(&sk);
 
     //sign tx
     let signed_tx = account.sign_transaction(web3::types::TransactionParameters::from(tx), &key).await.unwrap();
     
     //send tx
-    let future = eth.send_raw_transaction(signed_tx.raw_transaction).await.unwrap();
+    let txh = eth.send_raw_transaction(signed_tx.raw_transaction).await.unwrap();
 
-    println!("{}", future);
+    println!("{}", txh);
 
     //assemble swap
     //swap_contract: struct with contract adress and abi
@@ -211,4 +220,27 @@ pub async fn make_swaps(app: tauri::AppHandle){
         slippage
 
     */
+}
+
+#[tauri::command]
+async fn writeContract(app: tauri::AppHandle){
+
+    let path = app.path_resolver().resolve_resource("package/ABI/base/aerodrome/aerodrome_abi.json").expect("failed to resolve resource");
+    println!("{}", path.clone().into_os_string().into_string().unwrap());
+    let file = File::open(&path).unwrap();
+    let abi = web3::ethabi::Contract::load(file).unwrap();
+
+
+    let transport = web3::transports::Http::new("https://base.llamarpc.com").unwrap();
+    let w3 = web3::Web3::new(transport.clone());
+    
+    let eth = w3.eth();
+    //get contract
+    let adress: H160 = "0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43".parse().unwrap();
+    let swap_contract = web3::contract::Contract::new(eth.clone(), adress, abi);
+
+    let fun_result = swap_contract.abi().function("swapExactETHForToken").unwrap();
+
+    //let res = swap_contract.signed_call_with_confirmations("swapExactETHForTokens", "", from, 1).await.unwrap();
+
 }
