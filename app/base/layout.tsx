@@ -7,30 +7,38 @@ export default function RootLayout({ children }: {children: React.ReactNode}){
 
     const sidebarNavItems = [
       {
-        title: "Back",
-        href: "/"
-      },
-      {
         title: "Main",
         href: "/base"
       },
       {
         title: "Swap",
         href: "/base/swap"
+      },
+      {
+        title: "Back",
+        href: "/"
       }
       ]
 
     return(
-        <div>
-            <div>
-                <Sidebar items={sidebarNavItems}/>
+<div className="h-screen overflow-hidden">
+          <div>
+            
+          </div>
+          <div className="flex">
+            <div className="flex left-0 w-30 h-screen">
+              <Sidebar items={sidebarNavItems} className="flex-col h-fill"/>
             </div>
-            <div>
-                {children}
+              <div className="flex flex-col h-screen overflow-hidden w-full ml-3 bg-background">
+
+                <div className="h-min overflow-y-scroll">
+                  {children}
+                </div>
+                <div className="">
+                  <LogPanel className="w-[calc(100%-150px)]"/>
+                </div>
             </div>
-            <div>
-                <LogPanel className="w-[99%]" />
-            </div>
-        </div>
+          </div>
+      </div>
     )
 }

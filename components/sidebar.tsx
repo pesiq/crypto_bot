@@ -20,7 +20,7 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
     const pathname = usePathname()
 
     return(
-        <>
+        <div className="flex">
     <nav 
     className={cn(
         "flex items-center rounded-md border bg-background p-2 justify-center", className
@@ -46,7 +46,7 @@ export function Sidebar( {className, items, ...props}: SidebarNavProps ){
         ))}
 
     </nav>
-    </>
+    </div>
     )
 }
 
