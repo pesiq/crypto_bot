@@ -15,6 +15,8 @@ export const Web3button = () => {
     const [adress, setAdress] = useState("0xe688b84b23f322a994A53dbF8E15FA82CDB71127");
     const [rpc, setRpc] = useState("https://eth.llamarpc.com")
     const [response, setResponse] = useState("")
+    const [keyrest, setKeyresp] = useState("")
+    const [key, setKey] = useState("")
 
     async function w3call (adr: String, url: String) {
         await invoke ('check_balance', {adress: adr, rpc: url})
@@ -23,6 +25,16 @@ export const Web3button = () => {
         })
         .catch(() => {
             console.log("Failed to check balance")
+        })
+    }
+
+    const keycall =async (key: String, url: String) => {
+        await invoke ('get_adr', {key: key, rpc: url})
+        .then( () => {
+            console.log("alksdlakjsdkjas")
+        })
+        .catch( () => {
+            console.error("ashjskjdfkjsdhf")
         })
     }
 
@@ -58,6 +70,15 @@ export const Web3button = () => {
             }}>Check balance</Button>
             <div>
                 {response}
+            </div>
+            <Input id="privete_input" placeholder="input private key" onChange={
+                e => setKey(e.currentTarget.value)
+            }/>
+            <Button onClick={() => {
+                keycall(key, rpc)
+            }} > Check balance </Button>
+            <div>
+                {}
             </div>
         </div>
     )

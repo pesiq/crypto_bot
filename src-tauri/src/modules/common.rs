@@ -1,7 +1,7 @@
 
 use tauri::Manager;
 use web3;
-use web3::signing::{SecretKeyRef, SecretKey};
+use web3::signing::{SecretKeyRef, SecretKey, Key};
 //use web3::signing::SecretKey;
 use web3::types::{H160, U256};
 
@@ -51,7 +51,14 @@ pub async fn get_adr(app: tauri::AppHandle, rpc: String, key: String){
     let transport = web3::transports::Http::new(&rpc).unwrap();
     let web3 = web3::Web3::new(transport);
 
-    let key = SecretKeyRef::new(&SecretKey::from_slice(&hexutil::read_hex(&key).unwrap()).unwrap());
+    let pkey = SecretKey::from_slice(&hexutil::read_hex(&key).unwrap()).unwrap();
+    let keyref = SecretKeyRef::from(&pkey);
+
+    let address = keyref.address();
+
+    let balance = web3.eth().balance(address, None).await.unwrap();
+
+    emit_balance(app, balance, address);
 }
 
 

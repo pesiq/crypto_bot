@@ -19,6 +19,7 @@ fn main() {
       modules::common::check_balance,
       modules::common::get_gas,
       modules::eth_base::make_swaps,
+      modules::common::get_adr,
       ])
 
     .run(tauri::generate_context!())
