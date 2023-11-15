@@ -20,6 +20,7 @@ fn main() {
       modules::common::get_gas,
       modules::eth_base::make_swaps,
       modules::common::get_adr,
+      modules::swap::swap,
       ])
 
     .run(tauri::generate_context!())

@@ -21,6 +21,7 @@ pub struct SwapSettings{
     amount: String,
 }
 
+#[tauri::command]
 pub async fn swap(app: tauri::AppHandle, args: SwapArgs, settings: SwapSettings){
 
 
@@ -36,12 +37,13 @@ pub async fn swap(app: tauri::AppHandle, args: SwapArgs, settings: SwapSettings)
     let contract = Contract::new(w3.eth().clone(), contract_adress, abi);
 
     // let execute: fn(SecretKeyRef, Contract<Http>, SwapSettings,);
+    let function_name;
+    if settings.eth {
+        function_name = "swapExactETHForTokens"
+    } else {
+        function_name = "swapExactTokensForETH"
+    }
 
-    // if settings.eth {
-    //     execute = from_eth;
-    // } else {
-    //     execute = from_token;
-    // }
 
     for key in args.keys {
 
