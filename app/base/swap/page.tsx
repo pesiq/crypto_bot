@@ -11,7 +11,8 @@ export default function Swap(){
 
     return(
         <div>
-            <p>Swap module</p>
+            <p>Auto-Swap module</p>
+            <p>NOT OPERATIONAL</p>
             <div>
                 <div className="flex align-middle">
                     <Label className="">RPC: </Label>
